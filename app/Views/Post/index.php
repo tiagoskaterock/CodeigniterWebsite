@@ -1,3 +1,7 @@
+<?= $this->extend('layouts/default') ?>
+
+<?= $this->section('content') ?>
+
 <section>
 	<article class="post">		
 		<img src="img/2.jpg" alt="image">	
@@ -40,3 +44,5 @@
 </section>
 
 <?= $this->include('includes/blog_sidebar')  ?>
+
+<?= $this->endSection() ?>

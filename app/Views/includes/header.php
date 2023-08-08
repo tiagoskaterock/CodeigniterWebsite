@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Codeigniter Website <?= isset($title) ? ' | ' . $title : null ?></title>
+	<title>CodeIgniter Website <?= isset($title) ? ' | ' . $title : null ?></title>
 </head>
 <body>
 
