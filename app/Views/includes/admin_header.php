@@ -24,3 +24,7 @@
 	<link href="<?= base_url('/adm') ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
+
+<?= $this->include('includes/admin_errors') ?>
+
+<?= $this->include('includes/admin_message') ?>

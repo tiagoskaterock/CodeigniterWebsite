@@ -28,7 +28,18 @@ class PostController extends BaseController {
 
     function store() {
         $model = new PostModel();
-        $model->insert($this->request->getPost());
+        $id = $model->insert($this->request->getPost());
+        if ($id == false) {
+            return 
+                redirect()
+                ->back()
+                ->with('errors', $model->errors())
+                ->withInput();
+        }
+
+        return redirect()
+            ->to('admin/posts/' . $id)
+            ->with('success', 'Post saved successfully');
     }
 
     function edit($id) {

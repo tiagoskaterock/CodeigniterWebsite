@@ -17,30 +17,7 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-						<thead>
-							<tr>
-								<th>Title</th>
-								<th>Image</th>
-								<th>View</th>
-							</tr>
-						</thead>
-
-						<tbody>
-							<?php foreach ($data as $item): ?>
-								<tr>
-									<td><?= $item['title'] ?></td>
-									<td><img src="<?= $item['image'] ?>" alt="<?= $item['title'] ?>" height="20"></td>
-									<td>
-										<a href="<?= site_url('admin/posts/' . $item['id']) ?>" class="btn btn-sm btn-info" title="View">
-											View
-										</a>
-									</td>
-								</tr>								
-							<?php endforeach ?>
-						</tbody>
-
-					</table>
+					<?= $this->include('Post/_table') ?>					
 				</div>
 			</div>
 		</div>
