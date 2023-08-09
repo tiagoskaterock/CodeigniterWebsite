@@ -1,6 +1,6 @@
 <aside>
 	<h4>Sidebar</h4>
-	<img src="img/3.jpg">
+	<img src="<?php echo base_url('/img/3.jpg') ?>" alt="Sidebar Image">
 	<p>
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

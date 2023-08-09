@@ -31,7 +31,15 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index');
 
-$routes->get('/posts', 'PostController::index');
+$routes->get('/admin/posts', 'PostController::index');
+
+$routes->get('/admin/posts/(:num)', 'PostController::show/$1');
+
+$routes->get('/admin/posts/edit/(:num)', 'PostController::edit/$1');
+
+$routes->get('/admin/posts/create', 'PostController::create');
+
+$routes->post('/admin/posts/store', 'PostController::store');
 
 /*
  * --------------------------------------------------------------------

@@ -13,7 +13,8 @@ class PostModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+
+    protected $allowedFields    = ['title', 'content', 'image'];
 
     // Dates
     protected $useTimestamps = false;

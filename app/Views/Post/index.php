@@ -1,21 +1,54 @@
-<?= $this->extend('layouts/default') ?>
+<?= $this->include('includes/admin_header') ?>
 
-<?= $this->section('content') ?>
+<?= $this->include('includes/admin_nav') ?>
 
-<section>
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-	<?php foreach ($data as $item): ?>
+	<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800"><?php echo $title ?></h1>
 
-		<article class="post">		
-			<img src="<?= $item['image'] ?>" alt="<?= $item['title'] ?>">	
-			<h2><?= $item['title'] ?></h2>
-			<p><?= $item['content'] ?></p>						
-		</article>		
+	<a href="<?php echo base_url('/admin/posts/create/') ?>" class="btn btn-sm btn-primary mb-3" title="Add New">Add New</a>
 
-	<?php endforeach ?>
+		<!-- DataTales Example -->
+		<div class="card shadow mb-4">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Image</th>
+								<th>View</th>
+							</tr>
+						</thead>
 
-</section>
+						<tbody>
+							<?php foreach ($data as $item): ?>
+								<tr>
+									<td><?= $item['title'] ?></td>
+									<td><img src="<?= $item['image'] ?>" alt="<?= $item['title'] ?>" height="20"></td>
+									<td>
+										<a href="<?= site_url('admin/posts/' . $item['id']) ?>" class="btn btn-sm btn-info" title="View">
+											View
+										</a>
+									</td>
+								</tr>								
+							<?php endforeach ?>
+						</tbody>
 
-<?= $this->include('includes/blog_sidebar')  ?>
+					</table>
+				</div>
+			</div>
+		</div>
 
-<?= $this->endSection() ?>
+	</div>
+	<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<?= $this->include('includes/admin_footer') ?>
