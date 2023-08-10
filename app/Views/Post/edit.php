@@ -13,7 +13,7 @@
 			<div class="card-body">
 				<div class="table-responsive">
 
-					<?= form_open('admin/posts/update') ?>
+					<?= form_open('admin/posts/update/' . $item->id) ?>
 
 						<?= $this->include('Post/_form') ?>
 

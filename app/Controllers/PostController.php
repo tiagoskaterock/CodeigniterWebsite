@@ -3,37 +3,44 @@
 namespace App\Controllers;
 
 use App\Models\PostModel;
+use App\Entities\Post;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class PostController extends BaseController {
 
+    private PostModel $model;
+
+    function __construct() {
+        $this->model = new PostModel();
+    }
+
     function index(): string {        
-        $model = new PostModel();
-        $data = $model->findAll();
+        $data = $this->model->findAll();
         $title = "Blog";
         return view('Post/index', compact('title', 'data'));
     }
 
     function show($id) {
-        $model = new PostModel();
-        $item = $model->find($id);
-        $title = $item['title'];
+        $item = $this->getArticleOr404($id);
+        $title = $item->title;
         return view('Post/show', compact('item', 'title'));
     }
 
     function create() {
-        $item = new PostModel();        
+        $item = new Post();          
         $title = 'Add New Post';
-        return view('Post/create', compact('item', 'title'));
+        return view('Post/create', compact('title', 'item'));
     }
 
-    function store() {
-        $model = new PostModel();
-        $id = $model->insert($this->request->getPost());
+    function store() {        
+        $item = new Post($this->request->getPost());
+        $id = $this->model->insert($item);
+
         if ($id == false) {
             return 
                 redirect()
                 ->back()
-                ->with('errors', $model->errors())
+                ->with('errors', $this->model->errors())
                 ->withInput();
         }
 
@@ -43,9 +50,59 @@ class PostController extends BaseController {
     }
 
     function edit($id) {
-        $model = new PostModel();
-        $item = $model->find($id);
-        $title = $item['title'];
+        $item = $this->getArticleOr404($id);
+        $title = $item->title;
         return view('Post/edit', compact('item', 'title'));
     }
+
+    function update($id) {
+        $post = $this->getArticleOr404($id);
+        $post = $this->model->find($id);
+        $post->fill($this->request->getPost());
+
+        if (!$post->hasChanged()) {
+            return redirect()
+            ->to('admin/posts/' . $id)
+            ->with('info', 'Nothing to update');
+        }
+
+        if ($this->model->save($post)) {
+            return redirect()
+                ->to('admin/posts/' . $id)
+                ->with('success', 'Post updated successfully');            
+        };
+
+        return 
+            redirect()
+            ->back()
+            ->with('errors', $this->model->errors())
+            ->withInput();
+    }
+
+    function delete($id) {
+        $item = $this->getArticleOr404($id);
+
+        if (!$this->request->is('post')) {
+            return redirect()
+                ->to('admin/posts/' . $id)
+                ->with('danger', 'Forbidden'); 
+        }
+
+        if ($this->model->delete($id)) {
+            return redirect()
+                ->to('admin/posts')
+                ->with('warning', "Post $id delete successfully");            
+        };        
+    }
+
+    private function getArticleOr404($id) : Post {
+        $item = $this->model->find($id);
+
+        if ($item === null) {
+            throw new PageNotFoundException("Post with id $id not found");
+        }
+
+        return $item;
+    }
+
 }

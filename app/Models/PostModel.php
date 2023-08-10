@@ -10,11 +10,12 @@ class PostModel extends Model
     protected $table            = 'posts';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
 
     protected $allowedFields    = ['title', 'content', 'image'];
+
+    protected $returnType       = \App\Entities\Post::class;
 
     // Dates
     protected $useTimestamps = false;

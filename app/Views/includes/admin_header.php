@@ -23,6 +23,9 @@
 	<!-- Custom styles for this page -->
 	<link href="<?= base_url('/adm') ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-Uk4Vpdd+y3CQi5OS8euIvSJ4G6ouCw9Svm2GyFxhtLyL0EjSp6u+Htv62ZfJvGJe" crossorigin="anonymous">
+
+
 </head>
 
 <?= $this->include('includes/admin_errors') ?>
