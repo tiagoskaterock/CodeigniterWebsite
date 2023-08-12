@@ -7,6 +7,7 @@
 </p>
 
 <p align="center">
+  <img src="img/0.png" alt="Codeigniter Website" />
   <img src="img/1.png" alt="Codeigniter Website" />
   <img src="img/2.png" alt="Codeigniter Website" />
   <img src="img/3.png" alt="Codeigniter Website" />  
