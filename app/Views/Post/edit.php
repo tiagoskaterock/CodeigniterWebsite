@@ -13,8 +13,9 @@
 			<div class="card-body">
 				<div class="table-responsive">
 
-					<?= form_open('admin/posts/update/' . $item->id) ?>
+					<?= form_open(url_to('admin.posts.update', $item->id)) ?>
 
+						<input type="hidden" name="_method" value="patch">
 						<?= $this->include('Post/_form') ?>
 
 					<?= form_close() ?>
@@ -24,7 +25,7 @@
 
 		</div>
 
-		<a href="<?= site_url('admin/posts') ?>" class="btn btn-sm btn-primary" title="Back">Back</a>
+		<a href="<?= url_to('admin.posts') ?>" class="btn btn-sm btn-primary" title="Back">Back</a>
 
 	</div>
 	<!-- /.container-fluid -->

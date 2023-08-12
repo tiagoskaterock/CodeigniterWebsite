@@ -19,7 +19,7 @@ $routes->set404Override();
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-// $routes->setAutoRoute(false);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -31,20 +31,20 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index');
 
-// post routes
-$routes->get('/admin/posts', 'PostController::index');
+// blog routes
+$routes->get('/admin/posts', 'PostController::index', ['as' => 'admin.posts']);
 
-$routes->get('/admin/posts/(:num)', 'PostController::show/$1');
+$routes->get('/admin/posts/(:num)', 'PostController::show/$1', ['as' => 'admin.posts.show']);
 
-$routes->get('/admin/posts/edit/(:num)', 'PostController::edit/$1');
+$routes->get('/admin/posts/(:num)/edit', 'PostController::edit/$1', ['as' => 'admin.posts.edit']);
 
-$routes->post('/admin/posts/update/(:num)', 'PostController::update/$1');
+$routes->patch('/admin/posts/(:num)', 'PostController::update/$1', ['as' => 'admin.posts.update']);
 
-$routes->get('/admin/posts/create', 'PostController::create');
+$routes->get('/admin/posts/create', 'PostController::create', ['as' => 'admin.posts.create']);
 
-$routes->post('/admin/posts/store', 'PostController::store');
+$routes->post('/admin/posts', 'PostController::store', ['as' => 'admin.posts.store']);
 
-$routes->post('/admin/posts/delete/(:num)', 'PostController::delete/$1');
+$routes->delete('/admin/posts/delete/(:num)', 'PostController::delete/$1', ['as' => 'admin.posts.delete']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

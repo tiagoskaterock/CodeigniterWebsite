@@ -31,9 +31,9 @@
 
 		</div>
 
-		<a href="<?= site_url('admin/posts') ?>" class="btn btn-sm btn-primary" title="Back">Back</a>
+		<a href="<?= url_to('admin.posts') ?>" class="btn btn-sm btn-primary" title="Back">Back</a>
 
-		<a href="<?= site_url('admin/posts/edit/' . $item->id) ?>" class="btn btn-sm btn-primary" title="Edit">Edit</a>
+		<a href="<?= url_to('admin.posts.edit', $item->id) ?>" class="btn btn-sm btn-primary" title="Edit">Edit</a>
 
 	</div>
 	<!-- /.container-fluid -->

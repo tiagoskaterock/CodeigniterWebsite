@@ -24,20 +24,20 @@
 				</td>
 
 				<td>
-					<a href="<?= esc(site_url('admin/posts/' . $item->id)) ?>" class="btn btn-sm btn-info" title="View">
+					<a href="<?= esc(url_to('admin.posts.show', $item->id)) ?>" class="btn btn-sm btn-info" title="View">
 						<i class="fas fa-eye"></i>
 					</a>
 				</td>
 
 				<td>
-					<a href="<?= esc(site_url('admin/posts/edit/' . $item->id)) ?>" class="btn btn-sm btn-primary" title="Edit">
+					<a href="<?= esc(url_to('admin.posts.edit', $item->id)) ?>" class="btn btn-sm btn-primary" title="Edit">
 						<i class="fas fa-edit"></i>
 					</a>
 				</td>
 
 				<td>
-					<?= form_open('admin/posts/delete/' . $item->id) ?>
-
+					<?= form_open(url_to('admin.posts.delete', $item->id)) ?>
+						<input type="hidden" name="_method" value="delete">
 						<button type="submit" onclick="return confirm('Deseja mesmo excluir?');" title="Delete" class="btn btn-sm btn-danger">
 							<i class="fas fa-trash"></i>
 						</button>

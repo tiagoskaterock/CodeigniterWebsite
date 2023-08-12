@@ -8,7 +8,7 @@
 	<!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800"><?php echo $title ?></h1>
 
-	<a href="<?php echo base_url('/admin/posts/create/') ?>" class="btn btn-sm btn-primary mb-3" title="Add New">Add New</a>
+	<a href="<?php echo url_to('admin.posts.create') ?>" class="btn btn-sm btn-primary mb-3" title="Add New">Add New</a>
 
 		<!-- DataTales Example -->
 		<div class="card shadow mb-4">

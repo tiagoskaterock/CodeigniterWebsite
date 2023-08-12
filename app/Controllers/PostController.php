@@ -59,6 +59,7 @@ class PostController extends BaseController {
         $post = $this->getArticleOr404($id);
         $post = $this->model->find($id);
         $post->fill($this->request->getPost());
+        $post->__unset('_method');
 
         if (!$post->hasChanged()) {
             return redirect()
@@ -82,7 +83,7 @@ class PostController extends BaseController {
     function delete($id) {
         $item = $this->getArticleOr404($id);
 
-        if (!$this->request->is('post')) {
+        if (!$this->request->is('delete')) {
             return redirect()
                 ->to('admin/posts/' . $id)
                 ->with('danger', 'Forbidden'); 
