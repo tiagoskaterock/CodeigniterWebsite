@@ -31,6 +31,9 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index');
 
+// dashboard
+$routes->get('/admin/', 'DashboardController::index', ['as' => 'admin.dashboard']);
+
 // blog routes
 $routes->get('/admin/posts', 'PostController::index', ['as' => 'admin.posts']);
 
@@ -45,6 +48,8 @@ $routes->get('/admin/posts/create', 'PostController::create', ['as' => 'admin.po
 $routes->post('/admin/posts', 'PostController::store', ['as' => 'admin.posts.store']);
 
 $routes->delete('/admin/posts/delete/(:num)', 'PostController::delete/$1', ['as' => 'admin.posts.delete']);
+
+service('auth')->routes($routes);
 /*
  * --------------------------------------------------------------------
  * Additional Routing
