@@ -7,9 +7,6 @@ use App\Controllers\BaseController;
 class DashboardController extends BaseController
 {
     function index(): string {  
-
-        $this->sendTestEmail();
-
         $title = "Dashboard";      
         return view('Dashboard/index', compact('title'));
     }
