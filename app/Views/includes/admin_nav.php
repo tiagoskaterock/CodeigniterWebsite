@@ -19,10 +19,25 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item">
-				<a class="nav-link" href="index.html">
+				<a class="nav-link" href="<?= url_to('admin.dashboard') ?>" title="Dashboard">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Dashboard</span></a>
-				</li>
+					<span>Dashboard</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="<?= url_to('admin.posts') ?>" title="Posts">
+					<i class="fas fa-fw fa-blog"></i>
+					<span>Posts</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="<?= url_to('admin.users') ?>" title="Users">
+					<i class="fas fa-fw fa-users"></i>
+					<span>Users</span>
+				</a>
+			</li>
 
 				<!-- Divider -->
 				<hr class="sidebar-divider">

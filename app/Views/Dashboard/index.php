@@ -1,6 +1,6 @@
-<?= $this->include('includes/admin_header') ?>
+<?= $this->extend('layouts/admin') ?>
 
-<?= $this->include('includes/admin_nav') ?>
+<?= $this->section('content') ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -13,4 +13,4 @@
 </div>
 <!-- /.container-fluid -->
 
-<?= $this->include('includes/admin_footer') ?>
+<?= $this->endSection() ?>

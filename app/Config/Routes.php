@@ -49,6 +49,22 @@ $routes->post('/admin/posts', 'PostController::store', ['as' => 'admin.posts.sto
 
 $routes->delete('/admin/posts/delete/(:num)', 'PostController::delete/$1', ['as' => 'admin.posts.delete']);
 
+
+// users routes
+$routes->get('/admin/users', 'UserController::index', ['as' => 'admin.users']);
+
+$routes->get('/admin/users/(:num)', 'UserController::show/$1', ['as' => 'admin.users.show']);
+
+$routes->get('/admin/users/(:num)/edit', 'UserController::edit/$1', ['as' => 'admin.users.edit']);
+
+$routes->patch('/admin/users/(:num)', 'UserController::update/$1', ['as' => 'admin.users.update']);
+
+$routes->get('/admin/users/create', 'UserController::create', ['as' => 'admin.users.create']);
+
+$routes->post('/admin/users', 'UserController::store', ['as' => 'admin.users.store']);
+
+$routes->delete('/admin/users/delete/(:num)', 'UserController::delete/$1', ['as' => 'admin.users.delete']);
+
 service('auth')->routes($routes);
 /*
  * --------------------------------------------------------------------

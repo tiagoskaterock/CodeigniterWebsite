@@ -3,6 +3,6 @@
 namespace App\Entities;
 use CodeIgniter\Entity\Entity;
 
-class Post extends Entity {
+class User extends Entity {
 
 }
