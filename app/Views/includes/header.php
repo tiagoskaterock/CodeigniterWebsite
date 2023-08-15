@@ -14,6 +14,7 @@
 				<li><a href="#">About</a></li>
 				<li><a href="<?= site_url('/posts') ?>">Blog</a></li>
 				<li><a href="#">Contact</a></li>
+				<li><a href="<?php echo url_to('admin.dashboard') ?>">Admin</a></li>
 			</ul>
 		</nav>
 	</header>
