@@ -14,7 +14,15 @@
 				<li><a href="#">About</a></li>
 				<li><a href="<?= site_url('/posts') ?>">Blog</a></li>
 				<li><a href="#">Contact</a></li>
-				<li><a href="<?php echo url_to('admin.dashboard') ?>">Admin</a></li>
+
+				<?php if (auth()->user() /*and auth()->user()->inGroup('admin')*/): ?>
+					<li><a href="<?php echo url_to('admin.dashboard') ?>">Admin</a></li>
+				<?php endif ?>
+
+				<?php if (!auth()->user()): ?>
+					<li><a href="/login">Login</a></li>					
+				<?php endif ?>
+
 			</ul>
 		</nav>
 	</header>

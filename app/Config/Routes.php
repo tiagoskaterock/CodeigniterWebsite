@@ -31,39 +31,46 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index');
 
+
 // dashboard
-$routes->get('/admin/', 'DashboardController::index', ['as' => 'admin.dashboard']);
+$routes->get('/admin/', 'DashboardController::index', ['as' => 'admin.dashboard', 'filter' => 'group:user']);
+
 
 // blog routes
-$routes->get('/admin/posts', 'PostController::index', ['as' => 'admin.posts']);
+$routes->group('admin/posts', ['namespace' => 'App\Controllers', 'filter' => 'group:admin'], static function ($routes) {
+    $routes->get('', 'PostController::index', ['as' => 'admin.posts']);
 
-$routes->get('/admin/posts/(:num)', 'PostController::show/$1', ['as' => 'admin.posts.show']);
+    $routes->get('(:num)', 'PostController::show/$1', ['as' => 'admin.posts.show']);
 
-$routes->get('/admin/posts/(:num)/edit', 'PostController::edit/$1', ['as' => 'admin.posts.edit']);
+    $routes->get('(:num)/edit', 'PostController::edit/$1', ['as' => 'admin.posts.edit']);
 
-$routes->patch('/admin/posts/(:num)', 'PostController::update/$1', ['as' => 'admin.posts.update']);
+    $routes->patch('(:num)', 'PostController::update/$1', ['as' => 'admin.posts.update']);
 
-$routes->get('/admin/posts/create', 'PostController::create', ['as' => 'admin.posts.create']);
+    $routes->get('create', 'PostController::create', ['as' => 'admin.posts.create']);
 
-$routes->post('/admin/posts', 'PostController::store', ['as' => 'admin.posts.store']);
+    $routes->post('', 'PostController::store', ['as' => 'admin.posts.store']);
 
-$routes->delete('/admin/posts/delete/(:num)', 'PostController::delete/$1', ['as' => 'admin.posts.delete']);
+    $routes->delete('delete/(:num)', 'PostController::delete/$1', ['as' => 'admin.posts.delete']);    
+});
 
 
 // users routes
-$routes->get('/admin/users', 'UserController::index', ['as' => 'admin.users']);
+$routes->group('admin/users', ['namespace' => 'App\Controllers', 'filter' => 'group:admin'], static function ($routes) {
+    $routes->get('', 'UserController::index', ['as' => 'admin.users']);
 
-$routes->get('/admin/users/(:num)', 'UserController::show/$1', ['as' => 'admin.users.show']);
+    $routes->get('(:num)', 'UserController::show/$1', ['as' => 'admin.users.show']);
 
-$routes->get('/admin/users/(:num)/edit', 'UserController::edit/$1', ['as' => 'admin.users.edit']);
+    $routes->get('(:num)/edit', 'UserController::edit/$1', ['as' => 'admin.users.edit']);
 
-$routes->patch('/admin/users/(:num)', 'UserController::update/$1', ['as' => 'admin.users.update']);
+    $routes->patch('(:num)', 'UserController::update/$1', ['as' => 'admin.users.update']);
 
-$routes->get('/admin/users/create', 'UserController::create', ['as' => 'admin.users.create']);
+    $routes->get('create', 'UserController::create', ['as' => 'admin.users.create']);
 
-$routes->post('/admin/users', 'UserController::store', ['as' => 'admin.users.store']);
+    $routes->post('', 'UserController::store', ['as' => 'admin.users.store']);
 
-$routes->delete('/admin/users/delete/(:num)', 'UserController::delete/$1', ['as' => 'admin.users.delete']);
+    $routes->delete('delete/(:num)', 'UserController::delete/$1', ['as' => 'admin.users.delete']);
+});
+
 
 service('auth')->routes($routes);
 /*

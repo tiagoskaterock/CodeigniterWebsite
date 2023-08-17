@@ -23,6 +23,8 @@
 				<p>Email: <?= esc($item->email) ?></p>
 				<p>Status: <?= $item->active ? 'Active' : 'Deactivated' ?></p>
 
+				<p>Groups: <?php echo implode(', ', $item->getGroups()) ?></p>
+
 				<p>
 					Created: 
 						<?= $item->created_at ? $item->created_at->humanize() : null ?>, 
