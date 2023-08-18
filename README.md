@@ -14,4 +14,6 @@
   <img src="img/4.png" alt="Codeigniter Website" />  
   <img src="img/5.png" alt="Codeigniter Website" />  
   <img src="img/6.png" alt="Codeigniter Website" />  
+  <img src="img/7.png" alt="Codeigniter Website" />  
+  <img src="img/8.png" alt="Codeigniter Website" />  
 </p>

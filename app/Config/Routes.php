@@ -56,19 +56,33 @@ $routes->group('admin/posts', ['namespace' => 'App\Controllers', 'filter' => 'gr
 
 // users routes
 $routes->group('admin/users', ['namespace' => 'App\Controllers', 'filter' => 'group:admin'], static function ($routes) {
+
+    // index
     $routes->get('', 'UserController::index', ['as' => 'admin.users']);
 
+    // show
     $routes->get('(:num)', 'UserController::show/$1', ['as' => 'admin.users.show']);
 
+    // edit
     $routes->get('(:num)/edit', 'UserController::edit/$1', ['as' => 'admin.users.edit']);
 
+    // update
     $routes->patch('(:num)', 'UserController::update/$1', ['as' => 'admin.users.update']);
 
+    // create
     $routes->get('create', 'UserController::create', ['as' => 'admin.users.create']);
 
+    // store
     $routes->post('', 'UserController::store', ['as' => 'admin.users.store']);
 
+    // delete
     $routes->delete('delete/(:num)', 'UserController::delete/$1', ['as' => 'admin.users.delete']);
+
+    // show groups
+    $routes->get('(:num)/show_groups', 'UserController::show_groups/$1', ['as' => 'admin.users.show_groups']);
+
+    // update groups
+    $routes->patch('(:num)/groups', 'UserController::update_groups/$1', ['as' => 'admin.users.update_groups']);
 });
 
 

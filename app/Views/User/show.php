@@ -23,8 +23,6 @@
 				<p>Email: <?= esc($item->email) ?></p>
 				<p>Status: <?= $item->active ? 'Active' : 'Deactivated' ?></p>
 
-				<p>Groups: <?php echo implode(', ', $item->getGroups()) ?></p>
-
 				<p>
 					Created: 
 						<?= $item->created_at ? $item->created_at->humanize() : null ?>, 
@@ -35,6 +33,13 @@
 					Updated: 
 						<?= $item->updated_at ? $item->updated_at->humanize() : null ?>, 
 						<?= $item->updated_at ? date("d/m/Y - H:i:s", strtotime($item->updated_at)) : null ?>
+				</p>
+
+				<p>Groups: <?php echo implode(', ', $item->getGroups()) ?></p>
+				<p>
+					<a
+						title="See groups of this user" 
+						href="<?= url_to('admin.users.show_groups', $item->id) ?>">Edit Groups</a>
 				</p>
 				
 			</div>
