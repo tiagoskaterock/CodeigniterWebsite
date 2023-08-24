@@ -14,8 +14,19 @@ class PostController extends BaseController {
         $this->model = new PostModel();
     }
 
-    function index(): string {        
-        $data = $this->model->findAll();
+    function index(): string {         
+        $data = $this->model
+            ->select('posts.*, users.firstname')
+            ->join('users', 'users.id = posts.users_id')
+            ->findAll();
+        
+        /*
+        $builder = $db->table('posts');
+        $builder->select('*');
+        $builder->join('users', 'users.id = posts.users_id');
+        $query = $builder->get();
+        */
+
         $title = "Blog";
         return view('Post/index', compact('title', 'data'));
     }
