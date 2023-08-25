@@ -1,0 +1,19 @@
+{
+  "author": "",
+  "dependencies": {
+    "tailwindcss": "^3.3.3"
+  },
+  "description": "<h1 align=\"center\">Codeigniter Website</h1>",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "codeigniterwebsite",
+  "scripts": {
+    "build:css": "tailwindcss build public/css/styles.css -o public/css/tailwind.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

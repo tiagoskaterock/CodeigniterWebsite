@@ -2,6 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	
+	<link rel="stylesheet" href="<?= base_url('css/tailwind.css') ?>">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>CodeIgniter Website <?= isset($title) ? ' | ' . $title : null ?></title>
 </head>

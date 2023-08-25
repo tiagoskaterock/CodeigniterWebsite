@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 	<main>
-		<h1>Main Content</h1>
+		<h1 class="text-2xl bg-red-800">Main Content</h1>
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
