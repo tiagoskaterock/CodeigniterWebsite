@@ -14,34 +14,37 @@ class PostController extends BaseController {
         $this->model = new PostModel();
     }
 
-    function index(): string {         
+
+    function index(): string {           
         $data = $this->model
             ->select('posts.*, users.firstname')
             ->join('users', 'users.id = posts.users_id')
-            ->findAll();
-        
-        /*
-        $builder = $db->table('posts');
-        $builder->select('*');
-        $builder->join('users', 'users.id = posts.users_id');
-        $query = $builder->get();
-        */
+            ->where('users_id', auth()->user()->id)
+            ->findAll();        
 
         $title = "Blog";
         return view('Post/index', compact('title', 'data'));
     }
 
+
     function show($id) {
         $item = $this->getArticleOr404($id);
+        if (!$item->isOwner()) {
+            return redirect()
+                ->to('admin/posts')
+                ->with('danger', "Unauthorized");            
+        }
         $title = $item->title;
         return view('Post/show', compact('item', 'title'));
     }
+
 
     function create() {
         $item = new Post();          
         $title = 'Add New Post';
         return view('Post/create', compact('title', 'item'));
     }
+
 
     function store() {        
         $item = new Post($this->request->getPost());
@@ -60,11 +63,20 @@ class PostController extends BaseController {
             ->with('success', 'Post saved successfully');
     }
 
+
     function edit($id) {
         $item = $this->getArticleOr404($id);
+
+        if (!$item->isOwner()) {
+            return redirect()
+                ->to('admin/posts')
+                ->with('danger', "Unauthorized");            
+        }
+
         $title = $item->title;
         return view('Post/edit', compact('item', 'title'));
     }
+
 
     function update($id) {
         $post = $this->getArticleOr404($id);
@@ -91,6 +103,7 @@ class PostController extends BaseController {
             ->withInput();
     }
 
+
     function delete($id) {
         $item = $this->getArticleOr404($id);
 
@@ -106,6 +119,7 @@ class PostController extends BaseController {
                 ->with('warning', "Post $id delete successfully");            
         };        
     }
+
 
     private function getArticleOr404($id) : Post {
         $item = $this->model->find($id);
