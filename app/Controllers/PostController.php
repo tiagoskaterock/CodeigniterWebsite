@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\PostModel;
 use App\Entities\Post;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use RunTimeException;
 
 class PostController extends BaseController {
 
@@ -49,13 +50,37 @@ class PostController extends BaseController {
     function store() {        
         $item = new Post($this->request->getPost());
         $id = $this->model->insert($item);
+        $file = $this->request->getFile('image');
+
+        // no file
+        if( ! $file->isValid()) {
+            $error_code = $file->getError();
+            if ($error_code === UPLOAD_ERR_NO_FILE) {
+                return redirect()->back()->with('errors', ['No file selected'])->withInput();
+            }
+            throw new RunTimeException($file->getErrorString());
+        }
+
+        // invalid format
+        if ( ! in_array($file->getMimeType(), ['image/png', 'image/jpeg', 'image/gif'])) {
+            return redirect()->back()->with('errors', ['Invalid Format'])->withInput();
+        }
+
+        // file size too big
+        if($file->getSizeByUnit('mb') > 1) {
+            return redirect()->back()->with('errors', ['File too large. Max 1 MB'])->withInput();
+        }
+
+        $path = $file->store('posts');
+
+        $path = WRITEPATH . "uploads/" . $path;
+
+        service('image')->withFile($path)->fit(200, 200, 'center')->save($path);
+
+        dd($path);
 
         if ($id == false) {
-            return 
-                redirect()
-                ->back()
-                ->with('errors', $this->model->errors())
-                ->withInput();
+            return redirect()->back()->with('errors', $this->model->errors())->withInput();
         }
 
         return redirect()

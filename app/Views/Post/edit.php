@@ -13,7 +13,7 @@
 		<div class="card-body">
 			<div class="table-responsive">
 
-				<?= form_open(url_to('admin.posts.update', $item->id)) ?>
+				<?= form_open_multipart(url_to('admin.posts.update', $item->id)) ?>
 
 					<input type="hidden" name="_method" value="patch">
 					<?= $this->include('Post/_form') ?>

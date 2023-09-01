@@ -13,7 +13,7 @@
 		<div class="card-body">
 			<div class="table-responsive">
 
-				<?= form_open(url_to('admin.posts.store')) ?>
+				<?= form_open_multipart(url_to('admin.posts.store')) ?>
 
 					<?= $this->include('Post/_form') ?>
 
