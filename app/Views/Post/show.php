@@ -16,10 +16,14 @@
 		<div class="card-body">
 			<div class="table-responsive">
 
+				<?php echo site_url("/" .$item->image) ?>
+				<hr>
+				<?php echo base_url($item->image) ?>
+
 					<div class="container">
 							
 						<?php if ($item->image): ?>
-							<img src="<?= $item->image ?>" alt="<?= esc($item->title) ?>">
+							<img src="<?= url_to($item->image) ?>" alt="<?= esc($item->title) ?>">
 						<?php endif ?>
 
 						<p><?= esc($item->content) ?></p>

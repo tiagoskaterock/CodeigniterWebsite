@@ -6,6 +6,7 @@ use App\Models\PostModel;
 use App\Entities\Post;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use RunTimeException;
+use finfo;
 
 class PostController extends BaseController {
 
@@ -48,8 +49,8 @@ class PostController extends BaseController {
 
 
     function store() {        
-        $item = new Post($this->request->getPost());
-        $id = $this->model->insert($item);
+        $item = new Post($this->request->getPost());            
+
         $file = $this->request->getFile('image');
 
         // no file
@@ -77,7 +78,9 @@ class PostController extends BaseController {
 
         service('image')->withFile($path)->fit(200, 200, 'center')->save($path);
 
-        dd($path);
+        $item->image = $file->getName();
+
+        $id = $this->model->insert($item);
 
         if ($id == false) {
             return redirect()->back()->with('errors', $this->model->errors())->withInput();
@@ -86,6 +89,24 @@ class PostController extends BaseController {
         return redirect()
             ->to('admin/posts/' . $id)
             ->with('success', 'Post saved successfully');
+    }
+
+
+    function getImage($post_id) {
+        $post = $this->getArticleOr404($post_id);
+        if ($post->image) {
+            $path = WRITEPATH . "uploads/posts/" . $post->image;
+
+            $fino = new finfo(FILEINFO_MIME);
+
+            $type = $finfo->file($path);
+
+            header("Content-Type: $type");
+            header("Content-length: " . filesize($path));
+
+            readfile($path);
+            exit;
+        }
     }
 
 
